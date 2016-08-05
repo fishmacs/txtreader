@@ -14,7 +14,7 @@ libraryDependencies ++= Seq(
   "io.getquill" %% "quill-jdbc" % "0.8.0",
   //"com.readystatesoftware.sqliteasset" % "sqliteassethelper" % "2.0.1",
   // test
-  "org.robolectric" % "robolectric" % "3.0" % "test",
+  //"org.robolectric" % "robolectric" % "3.0" % "test",
   //"org.apache.maven" % "maven-ant-tasks" % "2.1.3" % "test",
   //"com.novocode" % "junit-interface" % "0.11" % "test",
   "org.scalatest" %% "scalatest" % "2.2.6" % "test",
@@ -24,11 +24,12 @@ libraryDependencies ++= Seq(
 
 fork in Test := true
 
-unmanagedClasspath in Test ++= (bootClasspath in Android).value
+//unmanagedClasspath in Test ++= (bootClasspath in Android).value
 
 //protifySettings
 
 proguardOptions in Android ++= Seq(
+  "-dontwarn **",
   "-dontwarn org.scaloid.common.TraitWebView*",
   "-dontwarn org.scalactic.**",
   "-dontwarn org.slf4j.**",
