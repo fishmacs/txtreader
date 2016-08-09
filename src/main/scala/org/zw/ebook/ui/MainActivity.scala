@@ -13,10 +13,10 @@ class MainActivity extends SActivity with TypedFindView {
   /** Called when the activity is first created. */
   override def onCreate(savedInstanceState: Bundle): Unit = {
     super.onCreate(savedInstanceState)
-    //val app = mBook.db.getApp()
+    val app = mBook.db.getApp()
     contentView = new SVerticalLayout {
       mText.here.fill
-       //.text(app.name)
+       .text(app.name)
        .textColor(BC.textColor)
        .backgroundColor(BC.bgColor)
        .textSize(BC.fontSize.sp)

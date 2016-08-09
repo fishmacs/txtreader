@@ -18,8 +18,9 @@ libraryDependencies ++= Seq(
   //"org.apache.maven" % "maven-ant-tasks" % "2.1.3" % "test",
   //"com.novocode" % "junit-interface" % "0.11" % "test",
   "org.scalatest" %% "scalatest" % "2.2.6" % "test",
-  "org.scalactic" %% "scalactic" % "2.2.6",
-  "com.geteit" %% "robotest" % "0.12" % Test
+  "org.scalatest" %% "scalatest" % "2.2.6" % "androidTest",
+  //"org.scalactic" %% "scalactic" % "2.2.6"
+  "com.geteit" %% "robotest" % "0.12" % "test"
 )
 
 fork in Test := true
@@ -29,8 +30,8 @@ fork in Test := true
 //protifySettings
 
 proguardOptions in Android ++= Seq(
-  "-dontwarn **",
   "-dontwarn org.scaloid.common.TraitWebView*",
+  "-dontwarn org.scalatest.**",
   "-dontwarn org.scalactic.**",
   "-dontwarn org.slf4j.**",
   "-dontwarn com.zaxxer.**",
@@ -49,3 +50,5 @@ dexMulti in Android := true
 dexMinimizeMain in Android := true
 
 dexMainClasses in Android := IO.readLines(baseDirectory.value / "MainDexList.txt")
+
+dexMaxHeap := "4096m"
