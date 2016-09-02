@@ -27,6 +27,8 @@ fork in Test := true
 
 //unmanagedClasspath in Test ++= (bootClasspath in Android).value
 
+//useProguardInDebug := false
+
 //protifySettings
 
 proguardOptions in Android ++= Seq(

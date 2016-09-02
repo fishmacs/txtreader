@@ -7,6 +7,22 @@ import java.io._
   */
 
 object IOHelper {
+  def use2[T](t: T)(block: T => Unit)(finalBlock: T => Unit): Unit = {
+    try {
+      block(t)
+    } finally {
+      finalBlock(t)
+    }
+  }
+  
+  def use[T <: { def close(): Unit }](closable: T)(block: T => Unit): Unit = {
+    try {
+      block(closable)
+    } finally {
+      closable.close()
+    }
+  }
+
   @throws(classOf[IOException])
   def copy(input: InputStream, output: OutputStream): Unit = {
     val buffer = new Array[Byte](8192)

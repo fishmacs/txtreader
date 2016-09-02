@@ -21,7 +21,7 @@ case class Chapter(id: Int, name: String, start: Int, size: Int, offset: Int, le
 
 case class Bookmark(id: Int, text: String, offset: Int, created_time: Date, chapter_id: Int, chapter_name: String, volume_id: Int, book_id: Int)
 
-class BookDB(private val dbFile: String)(implicit val ctx: Context = null) {
+class BookDB(dbFile: String)(implicit val ctx: Context = null) {
   private val dbPath =
     if (ctx != null) {
       val f = ctx.getDatabasePath(dbFile)
@@ -65,6 +65,13 @@ class BookDB(private val dbFile: String)(implicit val ctx: Context = null) {
   def getChapters(volumeId: Int) = {
     val q = quote {
       query[Chapter].filter(c => c.volume_id == lift(volumeId))
+    }
+    db.run(q)
+  }
+
+  def getBookmarks(volumeId: Int) = {
+    val q = quote {
+      query[Bookmark].filter(b => b.volume_id == lift(volumeId))
     }
     db.run(q)
   }
